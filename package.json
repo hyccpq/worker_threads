@@ -1,0 +1,14 @@
+{
+  "name": "my_worker_threads",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:hyccpq/worker_threads.git",
+  "author": "hyccpq <hyccpq@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+  	"dev": "node --experimental-worker ./index.js"
+  },
+  "dependencies": {
+    "node-threadpool": "^1.5.5"
+  }
+}
