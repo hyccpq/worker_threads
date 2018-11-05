@@ -1,23 +1,34 @@
-const { Executors } = require('node-threadpool');
+// const { Executors } = require('node-threadpool');
 const buffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
-const array = new Int32Array(buffer);
+const myList = new Int32Array(buffer);
+const { Worker } = require('worker_threads');
 
-(async () => {
-	const pool = Executors.newSingleThreadedExecutor();
+myList[0] = 1;
 
-	const result = pool.submit(async (d) => {
-		const view = new Int32Array(d);
-		console.log('2')
-		Atomics.wait(view, 0, 0); // wait here until the value is no longer 0
-		return Atomics.load(view, 0);
-	}, buffer);
+for(let i = 0; i < 3; i++) {
+  const worker = new Worker('./worker.js');
+  worker.postMessage({buffer, num: i});
+  worker.on('exit', () => console.log(`主线程打印`, `线程退出`, myList[0]))
+}
 
-	console.log(await result); // prints 1
-})();
 
-setTimeout(() => {
-	console.log('呵呵')
-	Atomics.store(array, 0, 123); // change the value from 0, unblocking the worker thread
-	Atomics.notify(array, 0, 1)
-	// console.log(Atomics.load(array, 0))
-}, 3000);
+
+// (async () => {
+// 	const pool = Executors.newFixedThreadPool(12);
+
+// 	let result = new Array(12);
+
+	// for (let i = 0; i < 23; i++) {
+// 		result[i] = pool.submit(async (d) => {
+// 			const fibo = (n) => {
+// 				return n > 1 ? fibo(n - 1) + fibo(n - 2) : 1;
+// 			}
+// 			let num = fibo(d);
+// 			console.log(num);
+// 			return num;
+// 		}, 42);
+// 	}
+
+// })();
+
+

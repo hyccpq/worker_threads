@@ -6,7 +6,8 @@
   "author": "hyccpq <hyccpq@hotmail.com>",
   "license": "MIT",
   "scripts": {
-  	"dev": "node --experimental-worker ./index.js"
+    "dev": "node --experimental-worker ./index.js",
+    "main": "node --experimental-worker ./main.js"
   },
   "dependencies": {
     "node-threadpool": "^1.5.5"
