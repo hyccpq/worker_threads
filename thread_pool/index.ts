@@ -36,7 +36,7 @@ class FixedThreadPool implements ThreadPool {
   ) {
     this.freeWorkers = Array.from(Array(numThreads).keys()).map(
       () =>
-        new Worker('./threadCode.ts', {
+        new Worker('./threadCode.js', {
           ...workerOptions,
           eval: true
         })
