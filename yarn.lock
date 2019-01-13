@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/node@^10.12.18":
+  version "10.12.18"
+  resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
+
 node-threadpool@^1.5.5:
   version "1.5.5"
   resolved "http://registry.npm.taobao.org/node-threadpool/download/node-threadpool-1.5.5.tgz#8a44d60afffc272e46dc670f41b5ca7f1cd81f09"
